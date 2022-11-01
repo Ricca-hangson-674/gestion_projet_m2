@@ -1,0 +1,182 @@
+#### Detail WorkFLow
+
+*** Sidebar
+Kanban
+Backlog
+Reporting
+Roadmap
+Project
+
+1) Creer un projet
+
+Se loger => Dashboard => Project => Creer un project
+
+2) Creer et remplir un backlog
+
+Se loger => Dashboard => Selectionner un Project 
+                      => creer un story
+
+3) Planifier et demarrer votre sprint
+
+Se loger => Dashboard => Selectionner un Project
+                      => Onglet Backlog 
+                      => Creer un sprint
+                      => Afficher Zone de Drag'n'Drop
+                      => Deposer dedans les story
+                      => Demarrer un sprint
+
+4) Consulter roadmap
+
+Se loger => Dashboard => Selectionner un Project
+                      => Onglet Roadmap 
+                      => Sprint en cours
+
+5) Consulter reporting
+
+Se loger => Dashboard => Selectionner un Project
+                      => Onglet Reporting
+                      => Selectionner un Sprint
+                      => BurnDown Chart | BurnUp Chart
+                      
+6) Affecter ou reaffecter un user a un Story ou Project
+
+Se loger => Dashboard => Selectionner un Project => Selectionner un user
+                      => Selectionner un Project => Onglet Backlog => Selectionner un story => Selectionner un user
+
+
+#### Entite
+
+  *** User
+
+id
+firstname
+lastname
+function
+roles[]
+createdAt
+updatedAt
+
+  *** Project
+id
+name
+description
+responsible [User]
+createdBy   [User]
+estimationBeginAt
+estimationEndAt
+beginAt
+endAt
+createdAt
+updatedAt
+
+  *** Backlog
+id
+name
+description
+responsible [User]
+createdBy   [User]
+createdAt
+updatedAt
+
+  *** Sprint
+id
+name
+description
+createdBy   [User]
+estimationBeginAt
+estimationEndAt
+estimationDuration
+beginAt
+endAt
+duration
+state [PRET | EN COURS | FINI ]
+createdAt
+updatedAt
+project_id
+
+  *** Task [Story]
+id
+name
+description
+pointStory
+responsibles : [User]
+createdBy    : User
+estimationBeginAt
+estimationEndAt
+estimationDuration
+beginAt
+endAt
+duration
+createdAt
+updatedAt
+sprint_id
+state_id [Column]
+
+  *** Column
+id
+name
+
+  *** Affectation
+
+id
+user_id
+story_id
+
+  *** Role
+
+ROLE_ADMIN
+ROLE_EDITOR
+ROLE_EXECUTOR
+
+
+#### RelationShip
+
+*** User <==> Project
+
+   *** CreatedBy
+1 User ==> Many Project [ROLE_ADMIN]
+1 User <== 1 Project
+
+   *** Responsible
+1 Project    ==> Many User
+Many Project <== 1 User
+
+*** User <==> Task
+
+   *** CreatedBy
+1 User ==> Many Task [ROLE_ADMIN]
+1 User <== 1 Task
+
+   *** Responsible
+1 Task    ==> Many User
+Many Task <== 1 User
+
+*** User <==> Sprint
+
+   *** CreatedBy
+1 User ==> Many Sprint [ROLE_ADMIN]
+1 User <== 1 Sprint
+
+*** User <==> Roles
+1 User ==> 1 Role
+1 User <== 1 Role
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
