@@ -50,19 +50,55 @@ $ composer require spatie/laravel-permission
 
 **********************************************
 
-Branch [inertia]
+Branch [inertia_react]
 
 **********************************************
 
+$ git checkout -b feat/inertia master
+
 $ composer require laravel/breeze --dev
 
-php artisan breeze:install
+$ php artisan breeze:install react
  
-php artisan migrate
-npm install
-npm run dev
+$ php artisan migrate
+$ npm install
+$ npm run dev
+
+### Drag and Drop
+
+[ https://github.com/kutlugsahin/react-smooth-dnd/ ]
+$ npm i react-smooth-dnd
+
+smooth-dnd
+react-beautiful-dnd
+
+[structure]
+resources
+  |
+  |-- css
+  |-- js
+  |-- views
 
 
+**********************************************
+
+Branch [vanillajs]
+
+**********************************************
+
+$ git checkout -b feat/vanillajs master
+
+$ composer require laravel/breeze --dev
+
+$ php artisan breeze:install
+ 
+$ php artisan migrate
+$ npm install
+$ npm run dev
+
+[ https://github.com/kutlugsahin/smooth-dnd ]
+[ https://kutlugsahin.github.io/smooth-dnd-demo/ ]
+$ npm i smooth-dnd
 
 
 

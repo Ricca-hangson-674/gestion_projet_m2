@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="project jira software clone" />
+        <meta name="author" content="nrh" />
+        <title>Projects - NRH Software</title>
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid justify-content-center">
+                <span class="navbar-brand">Bureau de Norme de Madagascar</span>
+            </div>
+        </nav>
+
+        <div class="container my-2">
+            <div class="alert alert-primary">
+                <div class="d-flex align-items-center justify-content-between">
+                    <p class="mb-0">Veuillez selectionner un projet ou creer un projet</p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-project-creation"> Creer </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card col-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Cree par NOM le 12/02/2022 a 14:15</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link text-decoration-none">Selectionner</a>
+                        <a href="#" class="card-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#modal-project-detail">Plus d'info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal detail -->
+        <div class="modal fade" id="modal-project-detail" tabindex="-1" aria-labelledby="modal-project-detail-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-project-detail-label">Projet #124</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <dl class="row">
+                            <dt class="col-sm-3">Nom</dt>
+                            <dd class="col-sm-9">Projet #1254</dd>
+                            <dt class="col-sm-3">Description</dt>
+                            <dd class="col-sm-9">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</dd>
+                            <dt class="col-sm-3">Responsable</dt>
+                            <dd class="col-sm-9">Doe Joe</dd>
+                            <dt class="col-sm-3">Cree par</dt>
+                            <dd class="col-sm-9">Doe Jane</dd>
+                            <dt class="col-sm-3">Cree le</dt>
+                            <dd class="col-sm-9">02/27/2022 le 15:44</dd>
+                        </dl>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">date de debut</th>
+                                    <th scope="col">date de fin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Reel</th>
+                                    <td>12/10/2022</td>
+                                    <td>12/15/2420</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Estimation</th>
+                                    <td>12/10/2022</td>
+                                    <td>12/15/2420</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal creation -->
+        <div class="modal fade" id="modal-project-creation" tabindex="-1" aria-labelledby="modal-project-creation" aria-hidden="true">
+            <div class="modal-dialog">
+                <form>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-project-creation-label">Creer un projet</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Nom</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-auto">
+                                    <label for="staticEmail2" class="form-label">Date de debut [reel]</label>
+                                    <input type="text" class="form-control" id="staticEmail2" value="email@example.com">
+                                </div>
+                                <div class="col-auto">
+                                    <label for="inputPassword2" class="form-label">Date de fin [reel]</label>
+                                    <input type="text" class="form-control" id="inputPassword2" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-auto">
+                                    <label for="staticEmail2" class="form-label">Date de debut [estimation]</label>
+                                    <input type="text" class="form-control" id="staticEmail2" value="email@example.com">
+                                </div>
+                                <div class="col-auto">
+                                    <label for="inputPassword2" class="form-label">Date de fin [estimation]</label>
+                                    <input type="text" class="form-control" id="inputPassword2" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Responsable</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Creer</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script src="js/bootstrap.bundle.min.js" defer></script>
+        <script src="js/fontawesome.min.js" defer></script>
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
