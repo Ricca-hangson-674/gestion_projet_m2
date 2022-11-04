@@ -77,11 +77,13 @@ responsible [User]
 createdBy   [User]
 createdAt
 updatedAt
+project_id
 
   *** Sprint
 id
 name
 description
+responsible [User]
 createdBy   [User]
 estimationBeginAt
 estimationEndAt
@@ -89,7 +91,7 @@ estimationDuration
 beginAt
 endAt
 duration
-state [PRET | EN COURS | FINI ]
+status [PRET | EN COURS | FINI ]
 createdAt
 updatedAt
 project_id
@@ -99,7 +101,7 @@ id
 name
 description
 pointStory
-responsibles : [User]
+responsibles : User | [User]
 createdBy    : User
 estimationBeginAt
 estimationEndAt
@@ -109,8 +111,11 @@ endAt
 duration
 createdAt
 updatedAt
+
+project_id
+backlog_id
 sprint_id
-state_id [Column]
+column_id [Column]
 
   *** Column
 id
@@ -120,7 +125,7 @@ name
 
 id
 user_id
-story_id
+task_id
 
   *** Role
 

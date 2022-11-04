@@ -1,0 +1,178 @@
+#### phpMyAdmin
+
+http://127.0.0.1:8081
+
+#### Nginx
+
+http://127.0.0.1:8080
+
+#### Laravel
+
+    $ sudo nano /etc/hosts
+    127.0.0.1   localhost.jy.laravel
+    127.0.0.1   localhost.nrh.laravel
+
+http://localhost.nrh.laravel:8080
+
+### Docker
+
+$ docker exec -it CONTAINER_NAME bash
+$ docker exec -it nrh_grh_php_fpm bash
+    $ cd laravel && chmod go+w -R storage 
+
+$ docker logs CONTAINER_NAME
+
+$ docker stop $(docker ps -q)
+
+### Add helpers.php
+
+$ composer dumpautoload
+
+
+#### Request
+
+$ php artisan make:request StoreUserRequest
+$ php artisan make:request UpdateUserRequest
+
+$ php artisan make:request StoreProjectRequest
+$ php artisan make:request UpdateProjectRequest
+
+$ php artisan make:request StoreBacklogRequest
+$ php artisan make:request UpdateBacklogRequest
+
+$ php artisan make:request StoreSprintRequest
+$ php artisan make:request UpdateSprintRequest
+
+$ php artisan make:request StoreTaskRequest
+$ php artisan make:request UpdateTaskRequest
+
+$ php artisan make:request StoreColumnRequest
+$ php artisan make:request UpdateColumnRequest
+
+$ php artisan make:request StoreAffectationRequest
+$ php artisan make:request UpdateAffectationRequest
+
+
+#### MODEL
+
+[ Exemple ]
+$ php artisan make:model Employee -mfs
+
+$ php artisan make:model User -mfs
+$ php artisan make:model Project -mfs
+$ php artisan make:model Backlog -mfs
+$ php artisan make:model Sprint -mfs
+$ php artisan make:model Task -mfs
+$ php artisan make:model Column -mfs
+$ php artisan make:model Affectation -mfs
+
+#### Controller
+
+[ Exemple ]
+$ php artisan make:controller UserController --resource --model=User
+$ php artisan make:controller ProjectController --resource --model=Project
+$ php artisan make:controller BacklogController --resource --model=Backlog
+$ php artisan make:controller SprintController --resource --model=Sprint
+$ php artisan make:controller TaskController --resource --model=Task
+$ php artisan make:controller ColumnController --resource --model=Column
+$ php artisan make:controller AffectationController --resource --model=Affectation
+
+#### Migration
+
+[ Exemple ]
+$ php artisan make:migration alter_users_add_keyforeign_employee
+
+$ php artisan make:migration alter_sprints_add_keyforeign
+$ php artisan make:migration alter_backlogs_add_keyforeign
+$ php artisan make:migration alter_tasks_add_keyforeign
+
+### Package
+
+[ https://laravel.com/docs/9.x/starter-kits#laravel-breeze ]
+$ composer require laravel/breeze --dev
+
+$ php artisan breeze:install || $ php artisan breeze:install react
+
+$ php artisan migrate
+$ npm install && npm run dev
+
+$ composer require barryvdh/laravel-debugbar --dev
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
