@@ -1,0 +1,211 @@
+######################################################
+
+https://inertiajs.com/
+
+#######################################################
+
+Inertia is a new approach to building classic server-driven web apps. 
+We call it the modern monolith.
+
+Inertia allows you to create fully client-side rendered, single-page apps, 
+without much of the complexity that comes with modern SPAs. 
+It does this by leveraging existing server-side frameworks.
+
+Inertia has no client-side routing, nor does it require an API. 
+Simply build controllers and page views like you've always done!
+
+*** Server-side
+
+$ composer require inertiajs/inertia-laravel
+
+    *** Root template [app.blade.php]
+    *** Middleware
+    $ php artisan inertia:middleware
+
+    App\Http\Kernel
+
+    *** Creating responses
+    return Inertia::render('Event/Show', [])
+
+*** Client-side
+
+$ npm install @inertiajs/inertia @inertiajs/inertia-react @inertiajs/progress
+
+    *** Initialize app
+    *** Progress indicator
+
+
+### Routing
+
+$ composer require tightenco/ziggy
+$ php artisan ziggy:generate
+
+[ app.blade.php ]
+@routes
+
+// routes/web.php
+Route::get('posts', fn (Request $request) => /* ... */)->name('posts.index');
+
+// app.js
+route('posts.index'); // 'https://ziggy.test/posts'
+
+### Pages
+
+    *** Creating pages
+    *** Creating layouts
+        *** Persistent layouts
+        *** Default layouts
+
+### Links
+
+### Forms
+
+    *** Submitting forms
+    *** Form helper [ useForm({ ... }) ]
+
+### Shared data
+
+    *** Flash messages
+    const { flash } = usePage().props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
