@@ -22,7 +22,11 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "bootstrap": "^5.2.2",
         "react-beautiful-dnd": "^13.1.1",
+        "react-bootstrap": "^2.6.0",
+        "react-datepicker": "^4.8.0",
+        "react-datetime-picker": "^4.1.1",
         "smooth-dnd": "^0.12.1"
     }
 }

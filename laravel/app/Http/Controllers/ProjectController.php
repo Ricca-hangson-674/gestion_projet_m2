@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,24 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::all()->transform(function ($project) {
+            return [
+                'id' => $project->id,
+                'name' => $project->name,
+                'description' => $project->description,
+                'responsible' => $project->responsibleUser->firstname,
+                'createdBy' => $project->createdByUser->firstname,
+                'estimationBeginAt' => nrh_dateTime($project->estimationBeginAt),
+                'estimationEndAt' => nrh_dateTime($project->estimationEndAt),
+                'beginAt' => nrh_dateTime($project->beginAt),
+                'endAt' => nrh_dateTime($project->endAt),
+                'created_at' => nrh_dateTime($project->created_at),
+            ];
+        });
+
+        return Inertia::render('Project/Index', [
+            'projects' => $projects
+        ]);
     }
 
     /**
@@ -46,7 +64,18 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return response()->json([
+            'id' => $project->id,
+            'name' => $project->name,
+            'description' => $project->description,
+            'responsible' => $project->responsibleUser->firstname,
+            'createdBy' => $project->createdByUser->firstname,
+            'estimationBeginAt' => nrh_dateTime($project->estimationBeginAt),
+            'estimationEndAt' => nrh_dateTime($project->estimationEndAt),
+            'beginAt' => nrh_dateTime($project->beginAt),
+            'endAt' => nrh_dateTime($project->endAt),
+            'created_at' => nrh_dateTime($project->created_at),
+        ]);
     }
 
     /**

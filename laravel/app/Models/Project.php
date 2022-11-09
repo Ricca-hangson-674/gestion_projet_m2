@@ -31,4 +31,24 @@ class Project extends Model
         'beginAt',
         'endAt',
     ];
+
+    /**
+     * Get the responsibleUser that owns the project.
+     */
+    public function responsibleUser()
+    {
+        # related, foreignKey, ownerKey
+        return $this->belongsTo(User::class, 'responsible', 'id');
+    }
+
+    /**
+     * Get the createdByUser that owns the project.
+     */
+    public function createdByUser()
+    {
+        # related, foreignKey, ownerKey
+        return $this->belongsTo(User::class, 'createdBy', 'id');
+    }
+
+
 }

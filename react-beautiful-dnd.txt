@@ -1,0 +1,190 @@
+$ npx create-react-app demo-1
+$ cd my-app
+$ npm start
+
+$ npm install react-beautiful-dnd --save
+
+import { DragDropContext } from 'react-beautiful-dnd';
+
+[ root ]
+   |
+   |-- DragDropContext
+   |       |-- Droppable
+   |       |      |-- Draggable
+   |       |      |-- Draggable
+
+<DragDropContext /> - Wraps the part of your application you want to have drag and drop enabled for
+<Droppable /> - An area that can be dropped into. Contains <Draggable />s
+<Draggable /> - What can be dragged around
+resetServerContext() - Utility for server side rendering (SSR)
+
+
+### https://codesandbox.io/s/ym3rvj1z71?file=/package.json:375-392
+
+$ npm i @atlaskit/theme @emotion/core @emotion/styled styled-components
+
+react@"^16.8.0" from @atlaskit/theme@12.2.2
+
+$ npm install --save react-beautiful-dnd --legacy-peer-deps
+
+$ npm i @atlaskit/theme --legacy-peer-deps
+
+[ Example ]
+   |
+   |-- src
+   |    |-- assets
+   |    |-- primatives
+   |    |     |-- quote-item.js
+   |    |     |-- quote-list.js
+   |    |     |-- title.js
+   |    |-- column.js
+   |    |-- constants.js
+   |    |-- data.js
+   |    |-- index.js
+   |    |-- reorder.js
+   |    |-- styles.css
+
+
+########################
+
+https://www.antstack.com/blog/to-do-app-with-react-beautiful-dnd/
+
+$ npm i react-beautiful-dnd @emotion/styled @emotion/react uuid
+
+
+[ Example ]
+   |
+   |-- src
+   |    |-- App.css
+   |    |-- App.js
+   |    |-- Kanban.js
+   |    |-- KanbanData.js
+   |    |-- TaskCard.js
+   |    |-- index.js
+   |    |-- index.css
+
+
+innerRef={provided.innerRef} ===> ref={provided.innerRef}
+
+
+####### Lien
+
+https://stackoverflow.com/questions/61270065/keep-draggable-in-its-list-while-dragging-react-beautiful-dnd
+
+https://stackoverflow.com/questions/58802602/react-beautiful-dnd-droppableprovided-placeholder-could-not-be-found-how
+
+https://codesandbox.io/s/react-beautiful-dnd-copy-and-drag-5trm0?file=/index.js:0-12054
+
+https://www.npmjs.com/package/react-smooth-dnd
+
+https://github.com/kutlugsahin/smooth-dnd
+
+https://kutlugsahin.github.io/smooth-dnd-demo/
+
+https://github.com/kutlugsahin/smooth-dnd-demo
+
+
+https://codesandbox.io/s/ym3rvj1z71?file=/src/column.js
+
+https://www.antstack.com/blog/to-do-app-with-react-beautiful-dnd/
+
+https://codesandbox.io/s/github/Ac-Srikanth/react-beautiful-dnd-blog-app?file=/src/App.js
+
+https://www.freecodecamp.org/news/how-to-add-drag-and-drop-in-react-with-react-beautiful-dnd/
+
+https://github.com/atlassian/react-beautiful-dnd/tree/master/stories
+
+https://github.com/atlassian/react-beautiful-dnd/blob/master/stories/src/board/board.jsx
+
+https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/about/examples.md
+
+
+https://react-beautiful-dnd.netlify.app/iframe.html?id=board--simple
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

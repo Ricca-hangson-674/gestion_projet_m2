@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Backlog;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BacklogController extends Controller
 {
@@ -14,7 +15,7 @@ class BacklogController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Backlog/Index');
     }
 
     /**
