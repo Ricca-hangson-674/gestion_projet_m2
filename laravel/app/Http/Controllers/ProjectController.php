@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -15,7 +18,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all()->transform(function ($project) {
+        $projects = Project::latest('created_at')->get()->transform(function ($project) {
             return [
                 'id' => $project->id,
                 'name' => $project->name,
@@ -30,8 +33,11 @@ class ProjectController extends Controller
             ];
         });
 
+        $users = User::all();
+
         return Inertia::render('Project/Index', [
-            'projects' => $projects
+            'projects' => $projects,
+            'users' => $users
         ]);
     }
 
@@ -53,7 +59,11 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['createdBy'] = Auth::id();
+        Project::create($data);
+
+        return Redirect::back()->with('message', 'Project created.');
     }
 
     /**

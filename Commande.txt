@@ -153,8 +153,35 @@ return (
 
                             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} showTimeSelect
   dateFormat="Pp" dateFormat="yyyy/MM/dd" />
+  
+##########################################################
 
 
+
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+<DatePicker selected={startDate} onChange={(date) => setStartDate(date)} showTimeSelect dateFormat="dd/MM/yyyy" />
+
+
+### Modal
+
+/resources/js/Pages/Modals/Index.js
+
+app/Http/Controllers/ModalController.php
+
+routes/web.php
+
+resources/js/Shared/MainMenu.js
+
+resouces/js/Shared/Modals/Modal.js
+resouces/js/Shared/Modals/ModalWithButtons.js
+
+app/Http/Controllers/OrganizationsController.php
+
+/resources/js/Pages/Organizations/Index.js
+                            
 
 
 
