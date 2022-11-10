@@ -43,6 +43,10 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'projectSelected' => [
+                'project' => fn () => $request->session()->get('projectSelected'),
+                'backlog' => fn () => $request->session()->get('backlogSelected')
+            ],
             'flash' => [
                 'message' => fn () => $request->session()->get('message')
             ],

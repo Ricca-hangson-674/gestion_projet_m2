@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Backlog;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        session()->forget('projectSelected');
+        session()->forget('backlogSelected');
+        
         $projects = Project::latest('created_at')->get()->transform(function ($project) {
             return [
                 'id' => $project->id,
@@ -78,7 +82,9 @@ class ProjectController extends Controller
             'id' => $project->id,
             'name' => $project->name,
             'description' => $project->description,
+            'responsible_id' => $project->responsible,
             'responsible' => $project->responsibleUser->firstname,
+            'createdBy_id' => $project->createdBy,
             'createdBy' => $project->createdByUser->firstname,
             'estimationBeginAt' => nrh_dateTime($project->estimationBeginAt),
             'estimationEndAt' => nrh_dateTime($project->estimationEndAt),
@@ -120,5 +126,31 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function selectProjet(Project $project)
+    {
+        session(['projectSelected' => $project]);
+
+        $backlog = Backlog::where('project_id', $project->id)->first();
+
+        if (!$backlog) {
+            $backlog = Backlog::create([
+                'name' => $project->name,
+                'description' =>$project->description,
+                'responsible'=> $project->responsible,
+                'createdBy'=> $project->createdBy,
+                'project_id' => $project->id
+            ]);
+        }
+        session(['backlogSelected' => $backlog]);
+
+        return Redirect::route('backlog.index');
+        // $value = session('key', 'default');
     }
 }

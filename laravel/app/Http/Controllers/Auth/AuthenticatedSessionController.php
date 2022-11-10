@@ -50,6 +50,8 @@ class AuthenticatedSessionController extends Controller
     {
         Auth::guard('web')->logout();
 
+        session()->forget('projectSelected');
+
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();

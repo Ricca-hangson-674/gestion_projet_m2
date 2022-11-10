@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const format = (date, format) => {
     var z = {
         M: date.getMonth() + 1,
@@ -16,8 +18,18 @@ export const format = (date, format) => {
 };
 
 const validationDate = (debut, fin) => {
-    return true
-}
+    return true;
+};
+
+export const formatMoment = (
+    date,
+    formatOrigin = "DD-MM-YYYY HH:mm:ss",
+    formatFinal = "YYYY-MM-DD HH:mm:ss"
+) => {
+    // 02-11-2022 23:47:13 => YYYY-MM-DD HH:MM:SS
+
+    return moment(date, formatOrigin).format(formatFinal);
+};
 
 /*
 

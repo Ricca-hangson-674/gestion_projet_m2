@@ -39,4 +39,34 @@ class Task extends Model
         'sprint_id',
         'column_id'
     ];
+
+
+    /**
+     * Get the responsibleUser that owns the task.
+     */
+    public function responsibleUser()
+    {
+        # related, foreignKey, ownerKey
+        return $this->belongsTo(User::class, 'responsible', 'id');
+    }
+
+    /**
+     * Get the createdByUser that owns the task.
+     */
+    public function createdByUser()
+    {
+        # related, foreignKey, ownerKey
+        return $this->belongsTo(User::class, 'createdBy', 'id');
+    }
+
+    /**
+     * Get attributions
+     *
+     * @return void
+     */
+    public function attributions()
+    {
+        # return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+        return $this->belongsToMany(User::class, 'nrh_affectations', 'task_id', 'user_id');
+    }
 }

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sprint;
+use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class SprintController extends Controller
 {
@@ -35,7 +38,18 @@ class SprintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['createdBy'] = Auth::id();
+        $data['status'] = 'EN COURS';
+        $data['project_id'] = $request->session()->get('projectSelected')->id;
+
+        $dateDebut = new \DateTime(date('Y-m-d', strtotime($request->beginAt)));
+        $dateFin = new \DateTime(date('Y-m-d', strtotime($request->endAt)));
+        $data['duration'] = $dateFin->diff($dateDebut)->days;
+
+        Sprint::create($data);
+
+        return Redirect::back()->with('message', 'Sprint created.');
     }
 
     /**

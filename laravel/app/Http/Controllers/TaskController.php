@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Affectation;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class TaskController extends Controller
 {
@@ -35,7 +38,21 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['createdBy'] = Auth::id();
+        $data['project_id'] = $request->session()->get('projectSelected')->id;
+        $data['backlog_id'] = $request->session()->get('backlogSelected')->id;
+
+        # 2022-11-03 15:58:36
+
+        $dateDebut = new \DateTime(date('Y-m-d', strtotime($request->beginAt)));
+        $dateFin = new \DateTime(date('Y-m-d', strtotime($request->endAt)));
+
+        $data['duration'] = $dateFin->diff($dateDebut)->days;
+        
+        Task::create($data);
+
+        return Redirect::back()->with('message', 'Task created.');
     }
 
     /**
@@ -81,5 +98,24 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         //
+    }
+
+    /**
+     * affectation
+     *
+     * @param Type|null $var
+     * @return void
+     */
+    public function affectation(Request $request)
+    {
+
+        foreach ($request->affectations as $affectation) {
+            var_dump($affectation);
+        }
+        dd($request->all());
+
+        # Affectation::where('task_id', $request->task)->delete();
+
+        return Redirect::back()->with('message', 'Task affeted.');
     }
 }

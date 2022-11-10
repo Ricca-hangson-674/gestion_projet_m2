@@ -33,6 +33,25 @@ class Sprint extends Model
         'endAt',
         'duration',
         'status',
+        
         'project_id'
     ];
+
+    /**
+     * Get the responsibleUser that owns the sprint.
+     */
+    public function responsibleUser()
+    {
+        # related, foreignKey, ownerKey
+        return $this->belongsTo(User::class, 'responsible', 'id');
+    }
+
+    /**
+     * Get the createdByUser that owns the sprint.
+     */
+    public function createdByUser()
+    {
+        # related, foreignKey, ownerKey
+        return $this->belongsTo(User::class, 'createdBy', 'id');
+    }
 }

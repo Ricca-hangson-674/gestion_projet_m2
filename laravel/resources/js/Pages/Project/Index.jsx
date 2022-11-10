@@ -6,7 +6,7 @@ import { useForm } from "@inertiajs/inertia-react";
 
 import DateTimePicker from "react-datetime-picker";
 
-import { format } from "@/Utils/date.js";
+import { format, formatMoment } from "@/Utils/date.js";
 
 export default function Project(props) {
     /** Props */
@@ -16,6 +16,7 @@ export default function Project(props) {
     const [show, setShow] = useState(false);
     const [form, setForm] = useState(false);
     const [current, setCurrent] = useState(null);
+    const [update, setUpdate] = useState(null);
 
     const [alert, setAlert] = useState(true);
 
@@ -35,6 +36,26 @@ export default function Project(props) {
             reset();
         };
     }, []);
+
+    // Update values for submit
+    useEffect(() => {
+        if (update) {
+            setData("name", update.name);
+            setData("description", update.description);
+            setData("responsible", update.responsible_id);
+
+            setData(
+                "estimationBeginAt",
+                new Date(formatMoment(update.estimationBeginAt))
+            );
+            setData(
+                "estimationEndAt",
+                new Date(formatMoment(update.estimationEndAt))
+            );
+            setData("beginAt", new Date(formatMoment(update.beginAt)));
+            setData("endAt", new Date(formatMoment(update.endAt)));
+        }
+    }, [update]);
 
     const onHandleChange = (event) => {
         setData(
@@ -83,46 +104,31 @@ export default function Project(props) {
             console.error(e);
         }
 
-        return response
+        return response;
     };
 
     const handleCloseForm = () => setForm(false);
-    const handleShowForm = async (project=null) => {
+    const handleShowForm = async (project = null) => {
 
-        console.log('handleShowForm', project)
-
-        if(project){ 
-            const response = await getProject(project)
+        if (project) {
+            const response = await getProject(project);
 
             if (response) {
-                console.log(response.beginAt, new Date(response.beginAt))
-
-                // 02-11-2022 23:47:13 => YYYY-MM-DD HH:MM:SS
-
-                setData('name', response.name)
-                setData('description', response.description)
-                setData('responsible', response.responsible)
-                setData('estimationBeginAt', new Date(response.estimationBeginAt))
-                setData('estimationEndAt', new Date(response.estimationEndAt))
-                setData('beginAt', new Date(response.beginAt))
-                setData('endAt', new Date(response.endAt))
+                setUpdate(response);
             }
         }
-        
+
         setForm(true);
     };
 
     const handleClose = () => setShow(false);
     const handleShow = async (project) => {
-        console.log('handleShow', project)
 
-        const response = await getProject(project)
+        const response = await getProject(project);
         setCurrent(response);
 
         setShow(true);
     };
-
-
 
     // console.log(auth, projects, users);
 
@@ -186,13 +192,13 @@ export default function Project(props) {
                                 <Button
                                     as={"a"}
                                     variant="primary"
-                                    className="card-link text-decoration-none"
+                                    className="card-link text-decoration-none d-none"
                                     onClick={() => handleShowForm(project.id)}
                                 >
                                     Modifier
                                 </Button>
                                 <a
-                                    href="#"
+                                    href={route('selectProjet', {project: project.id})}
                                     className="card-link text-decoration-none"
                                 >
                                     Selectionner

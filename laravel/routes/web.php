@@ -53,7 +53,9 @@ Route::prefix('admin')
         Route::resource('task', TaskController::class);
         Route::resource('backlog', BacklogController::class);
 
+        Route::name('selectProjet')->get('selectProjet/{project}', [ProjectController::class, 'selectProjet']);
         Route::name('chart')->get('chart', [ChartController::class, 'index']);
         Route::name('roadmap')->get('roadmap', [RoadmapController::class, 'index']);
         Route::name('taskboard')->get('taskboard', [TaskBoardController::class, 'index']);
+        Route::name('task.affectations')->post('affectations', [TaskController::class, 'affectation']);
     });

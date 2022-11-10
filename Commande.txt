@@ -181,10 +181,22 @@ resouces/js/Shared/Modals/ModalWithButtons.js
 app/Http/Controllers/OrganizationsController.php
 
 /resources/js/Pages/Organizations/Index.js
-                            
 
+Cotisse Antananarivo         
+032 11 027 10             
+032 11 027 33
 
+####################
 
+ManyToMany
+
+$category = Category::find([3, 4]);
+$product->categories()->attach($category);
+
+$category = Category::find(3);
+$product->categories()->detach($category);
+
+$user->roles()->toggle([1, 2, 3]);
 
 
 

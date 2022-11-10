@@ -26,6 +26,9 @@ export default function Admin({ children, auth }) {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
+                                <Dropdown.Item href={route("project.index")}>
+                                    Projects
+                                </Dropdown.Item>
                                 <Link
                                     href={route("logout")}
                                     method="post"
