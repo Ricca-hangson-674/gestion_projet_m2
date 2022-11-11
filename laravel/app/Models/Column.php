@@ -24,4 +24,13 @@ class Column extends Model
     protected $fillable = [
         'name',
     ];
+
+    /**
+     * Get the tasks that owns the sprint.
+     */
+    public function tasks()
+    {
+        # related, foreignKey, ownerKey
+        return $this->hasMany(Task::class, 'column_id', 'id');
+    }
 }

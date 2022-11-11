@@ -199,16 +199,71 @@ $product->categories()->detach($category);
 $user->roles()->toggle([1, 2, 3]);
 
 
+Affectation ==> Task 
+task_id         id
+user_id         sprint_id
+
+### Contributions
+
+SELECT COUNT(DISTINCT affectation.user_id) contributions from nrh_affectations affectation inner join nrh_tasks task ON affectation.task_id = task.id WHERE task.sprint_id = 1; 
+
+SELECT SUM(task.pointStory) pointStory from nrh_tasks task WHERE task.sprint_id = 1; 
+
+DB::table('users)->selectRaw('count(*) as user_count, status')
+->where('status', 1)
+->groupBy('status')
+->get()
+
+
+feat/demo-1 [ Marche ]
+feat/demo-3 [ Marche ]
+
+
+                        isDropDisabled={false}
+                        
+                        columncolumn
+
+
+{
+  "draggableId": "Do",
+  "type": "DEFAULT",
+  "source": {
+    "index": 1,
+    "droppableId": "COLUMNS"
+  },
+  "reason": "DROP",
+  "mode": "FLUID",
+  "destination": null,
+  "combine": null
+}
+
+### Structure
+
+[
+ {
+   id: 1,
+   name: 'column',
+   tasks: [
+     {
+       id: 1,
+       name: 'task'
+     }
+   ]
+ }
+]
 
 
 
-
-
-
-
-
-
-
+                events={[
+                    { title: "event 1", date: "2022-11-09" },
+                    { title: "event 2", date: "2022-11-05" },
+                    {
+                        title: 'my event',
+                        start: '2022-11-01',
+                        end: '2022-11-07',
+                        backgroundColor: 'red'
+                      }
+                ]}
 
 
 

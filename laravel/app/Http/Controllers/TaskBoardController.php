@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Column;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,6 +15,15 @@ class TaskBoardController extends Controller
      */
     public function index()
     {
-        return Inertia::render('TaskBoard/Index');
+        $columns = Column::all()->transform(function ($column) {
+            return [
+                'id' => $column->id,
+                'name' => $column->name,
+                'tasks' => $column->tasks,
+            ];
+        });
+        return Inertia::render('TaskBoard/Index', [
+            'columns' => $columns
+        ]);
     }
 }

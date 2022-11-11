@@ -42,6 +42,7 @@ class TaskController extends Controller
         $data['createdBy'] = Auth::id();
         $data['project_id'] = $request->session()->get('projectSelected')->id;
         $data['backlog_id'] = $request->session()->get('backlogSelected')->id;
+        $data['column_id'] = $request->session()->get('columnSelected')->id;
 
         # 2022-11-03 15:58:36
 
@@ -108,13 +109,14 @@ class TaskController extends Controller
      */
     public function affectation(Request $request)
     {
+        Affectation::where('task_id', $request->task)->delete();
 
         foreach ($request->affectations as $affectation) {
-            var_dump($affectation);
+            Affectation::create([
+                'task_id' => $request->task,
+                'user_id' => $affectation['value']
+            ]);
         }
-        dd($request->all());
-
-        # Affectation::where('task_id', $request->task)->delete();
 
         return Redirect::back()->with('message', 'Task affeted.');
     }

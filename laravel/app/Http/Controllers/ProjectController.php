@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Backlog;
+use App\Models\Column;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class ProjectController extends Controller
     {
         session()->forget('projectSelected');
         session()->forget('backlogSelected');
+        session()->forget('columnSelected');
         
         $projects = Project::latest('created_at')->get()->transform(function ($project) {
             return [
@@ -139,6 +141,14 @@ class ProjectController extends Controller
 
         $backlog = Backlog::where('project_id', $project->id)->first();
 
+        $column = Column::where('name', 'Backlog')->first();
+
+        if (!$column) {
+            $column = Column::create([
+                'name' => 'Backlog',
+            ]);
+        }
+
         if (!$backlog) {
             $backlog = Backlog::create([
                 'name' => $project->name,
@@ -148,6 +158,7 @@ class ProjectController extends Controller
                 'project_id' => $project->id
             ]);
         }
+        session(['columnSelected' => $column]);
         session(['backlogSelected' => $backlog]);
 
         return Redirect::route('backlog.index');

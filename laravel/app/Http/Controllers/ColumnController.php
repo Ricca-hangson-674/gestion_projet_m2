@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Column;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ColumnController extends Controller
 {
@@ -14,7 +15,6 @@ class ColumnController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -35,7 +35,11 @@ class ColumnController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        Column::create($data);
+
+        return Redirect::back()->with('message', 'Column created.');
     }
 
     /**

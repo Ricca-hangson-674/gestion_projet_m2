@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JS</title>
+</head>
+<body>
+
+  <script type="text/javascript">
+    (function () {
+      const randomIntFromInterval = (min, max) => {
+    // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+      const reorder = (list, startIndex, endIndex) => {
+        const result = Array.from(list);
+
+        const [removed] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, removed);
+
+        return result;
+    };
+
+    /**
+     * La méthode splice() modifie le contenu d'un tableau en retirant des éléments et/ou en ajoutant de nouveaux éléments à même le tableau.On peut ainsi vider ou remplacer une partie d'un tableau.
+     * 
+     * const months = ['Jan', 'March', 'April', 'June'];
+        months.splice(1, 0, 'Feb');
+        // inserts at index 1
+        // console.log(months);
+        // expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+        months.splice(4, 1, 'May');
+        // replaces 1 element at index 4
+        // console.log(months);
+        // expected output: Array ["Jan", "Feb", "March", "April", "May"]
+
+        var tabElementsSupprimes = array.splice(début, nbASupprimer[, élem1[, élem2[, ...]]])
+
+     */
+
+    const copy = (source, destination, droppableSource, droppableDestination) => {
+      // console.log("==> dest", destination);
+
+      const sourceClone = Array.from(source);
+      const destClone = Array.from(destination);
+
+      // console.log('sourceClone', sourceClone, 'destClone', destClone)
+
+      const item = sourceClone[droppableSource.index];
+
+      destClone.splice(droppableDestination.index, 0, { ...item, id: randomIntFromInterval(-11, 20) });
+      return destClone;
+    };
+
+    const move = (source, destination, droppableSource, droppableDestination) => {
+      const sourceClone = Array.from(source);
+      const destClone = Array.from(destination);
+
+      const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+      destClone.splice(droppableDestination.index, 0, removed);
+
+      const result = {};
+      result[droppableSource.droppableId] = sourceClone;
+      result[droppableDestination.droppableId] = destClone;
+
+      const resultArray = []
+      resultArray.push(sourceClone)
+      resultArray.push(destClone)
+
+      return resultArray;
+  };
+
+    // console.log(Array.from('foo'));
+    // expected output: Array ["f", "o", "o"]
+
+    // console.log(Array.from([1, 2, 3], x => x + x));
+    // expected output: Array [2, 4, 6]
+    
+    /** Reorder */
+    const list = ["A", 'B', 'C'];
+    // console.log(list, reorder(list, 0, 2))
+
+    /** Copy */
+
+    /*copy(
+      ITEMS,
+      this.state[destination.droppableId],
+      source,
+      destination
+    )*/
+    const ITEMS = [
+      { id: 1, content: "Headline", },
+      { id: 2, content: "Copy", }
+    ]
+    const source = {
+      "index": 1,
+      "droppableId": "COLUMNS"
+    }
+    const destination = {
+      "index": 0,
+      "droppableId": "COLUMNS"
+    }
+    // console.log(ITEMS, copy(ITEMS, [], source, destination))
+
+    const ITEMS_nrh = [
+     {
+       id: 1,
+       name: 'column',
+       tasks: [
+         {
+           id: 1,
+           name: 'task 1'
+         },
+         {
+           id: 2,
+           name: 'task 2'
+         },
+         {
+           id: 3,
+           name: 'task 3'
+         }
+       ]
+     },
+     {
+       id: 2,
+       name: 'column 1',
+       tasks: [
+         {
+           id: 3,
+           name: 'task 3'
+         }
+       ]
+     },
+     {
+       id: 3,
+       name: 'column 2',
+       tasks: [
+         {
+           id: 4,
+           name: 'task 4'
+         }
+       ]
+     }
+    ]
+
+    /** Reorder */
+    console.log('Reorder COLUMNS', ITEMS_nrh, reorder(ITEMS_nrh, 0, 2))
+    console.log('Reorder ITEMS', ITEMS_nrh[0].tasks, reorder(ITEMS_nrh[0].tasks, 0, 2))
+
+    /** Copy */
+    console.log('Copy COLUMNS',ITEMS, copy(ITEMS, [], source, destination))
+    console.log('Copy ITEMS',ITEMS, copy(ITEMS, [], source, destination))
+
+    /** Move */
+    console.log(
+      'Move ITEMS',
+      ITEMS_nrh[0].tasks, 
+      ITEMS_nrh[2].tasks, 
+      move(ITEMS_nrh[0].tasks, ITEMS_nrh[2].tasks, 
+        {"index": 0,"droppableId": "COLUMNS"}, {"index": 0,"droppableId": "COLUMNS"}))
+    })()
+  </script>
+
+</body>
+</html>

@@ -2,3 +2,7 @@
   /* visibility: collapse; */
   visibility: visible;
 }
+
+.nrh_item + p {
+  display: none !important;
+}

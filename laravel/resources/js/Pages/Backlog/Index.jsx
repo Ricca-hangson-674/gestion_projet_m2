@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
 import { useForm } from "@inertiajs/inertia-react";
 import Accordion from "react-bootstrap/Accordion";
-import { Inertia } from '@inertiajs/inertia'
+import { Inertia } from "@inertiajs/inertia";
 
 import DateTimePicker from "react-datetime-picker";
 import Select from "react-select";
@@ -22,12 +22,13 @@ export default function Backlog(props) {
         tasks,
         sprints,
         options,
+        sprint,
     } = props;
 
     /** State */
     const [type, setType] = useState(null);
     const [current, setCurrent] = useState(null);
-    const [sprint, setSprint] = useState(null);
+    const [sprintState, setSprintState] = useState(null);
 
     const [form, setForm] = useState(false);
     const [detail, setDetail] = useState(false);
@@ -56,6 +57,7 @@ export default function Backlog(props) {
     });
 
     useEffect(() => {
+        if (sprint) setSprintState(sprint);
         return () => {
             reset();
         };
@@ -117,14 +119,28 @@ export default function Backlog(props) {
     const affectTask = () => {
         console.log("affectTask", affectations);
 
-        const body = {affectations, task: current.id}
+        const body = { affectations, task: current.id };
 
         const url = route("task.affectations");
 
-        Inertia.post(url, body)
+        setAffectations([]);
+
+        Inertia.post(url, body);
     };
 
-    console.log(tasks);
+    const startSprint = (s) => {
+        const body = { sprint: s.id };
+
+        setSprintState(s);
+
+        const url = route("sprint.start");
+
+        setAffectations([]);
+
+        Inertia.post(url, body);
+    };
+
+    console.log(projectSelected);
     // console.log(errors);
     // console.log("projectSelected", projectSelected);
     // console.log("type", type);
@@ -136,12 +152,14 @@ export default function Backlog(props) {
                     <div className=" my-2 d-flex justify-content-between">
                         <h1>WORKSPACE</h1>
 
-                        <Button
-                            variant="primary"
-                            onClick={() => handleShowForm("SPRINT")}
-                        >
-                            Creer un sprint
-                        </Button>
+                        {auth.user.roles !== "ROLE_EXECUTOR" ? (
+                            <Button
+                                variant="primary"
+                                onClick={() => handleShowForm("SPRINT")}
+                            >
+                                Creer un sprint
+                            </Button>
+                        ) : null}
                     </div>
 
                     {flash.message ? (
@@ -161,12 +179,16 @@ export default function Backlog(props) {
                                 <div className="card-header d-flex justify-content-between">
                                     <div>Taches</div>
 
-                                    <Button
-                                        variant="secondary"
-                                        onClick={() => handleShowForm("TASK")}
-                                    >
-                                        Creer
-                                    </Button>
+                                    {auth.user.roles !== "ROLE_EXECUTOR" ? (
+                                        <Button
+                                            variant="secondary"
+                                            onClick={() =>
+                                                handleShowForm("TASK")
+                                            }
+                                        >
+                                            Creer
+                                        </Button>
+                                    ) : null}
                                 </div>
                                 <div className="card-body">
                                     <ul className="list-group">
@@ -212,38 +234,49 @@ export default function Backlog(props) {
                             </div>
                         </div>
                         <div className="col-md-8">
-                            <div className="card">
-                                <div className="card-header">
-                                    Sprint [encours]
+                            {sprintState ? (
+                                <div className="card">
+                                    <div className="card-header d-flex justify-content-between">
+                                        <div>
+                                            {sprintState.name} [
+                                            {sprintState.status}]
+                                        </div>
+                                        <ul className="nav">
+                                            <li className="nav-item me-1">
+                                                <span className="badge rounded-pill bg-danger">
+                                                    {sprintState.storyPoint
+                                                        ? sprintState.storyPoint
+                                                        : 0}
+                                                </span>
+                                                StoryPoint
+                                            </li>
+                                            <li className="nav-item">
+                                                <span className="badge rounded-pill bg-danger">
+                                                    {sprintState.contributeurs
+                                                        ? sprintState.contributeurs
+                                                        : 0}
+                                                </span>
+                                                Contributeurs
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="card-body sprint-list">
+                                        <ul className="list-group">
+                                            <li className="list-group-item d-flex justify-content-between">
+                                                <h5>Name</h5>
+                                                <ul className="list-unstyled team-info">
+                                                    <li>
+                                                        <img
+                                                            src="/images/avatar1.jpg"
+                                                            alt="Avatar"
+                                                        />
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div className="card-body sprint-list">
-                                    <ul className="list-group">
-                                        <li className="list-group-item d-flex justify-content-between">
-                                            <h5>Name</h5>
-                                            <ul className="list-unstyled team-info">
-                                                <li>
-                                                    <img
-                                                        src="/images/avatar1.jpg"
-                                                        alt="Avatar"
-                                                    />
-                                                </li>
-                                                <li>
-                                                    <img
-                                                        src="/images/avatar2.jpg"
-                                                        alt="Avatar"
-                                                    />
-                                                </li>
-                                                <li>
-                                                    <img
-                                                        src="/images/avatar3.jpg"
-                                                        alt="Avatar"
-                                                    />
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            ) : null}
 
                             <Accordion className=" mt-4 ">
                                 <Accordion.Item eventKey="0">
@@ -287,7 +320,7 @@ export default function Backlog(props) {
                                                             </td>
                                                             <td>
                                                                 <button
-                                                                    className="btn btn-secondary btn-sm"
+                                                                    className="btn btn-secondary btn-sm mr-1"
                                                                     onClick={() =>
                                                                         handleShowDetail(
                                                                             "SPRINT",
@@ -297,6 +330,18 @@ export default function Backlog(props) {
                                                                 >
                                                                     voir
                                                                 </button>
+                                                                {!sprintState ? (
+                                                                    <button
+                                                                        className="btn btn-secondary btn-sm"
+                                                                        onClick={() =>
+                                                                            startSprint(
+                                                                                sprint
+                                                                            )
+                                                                        }
+                                                                    >
+                                                                        Demarrer
+                                                                    </button>
+                                                                ) : null}
                                                             </td>
                                                         </tr>
                                                     ))}
@@ -308,58 +353,6 @@ export default function Backlog(props) {
                                     </Accordion.Body>
                                 </Accordion.Item>
                             </Accordion>
-
-                            <div className="card mt-4">
-                                <div className="card-header d-flex justify-content-between">
-                                    <div>Sprint</div>
-                                    <ul className="nav">
-                                        <li className="nav-item me-1">
-                                            <span className="badge rounded-pill bg-danger">
-                                                990
-                                            </span>
-                                            StoryPoint
-                                        </li>
-                                        <li className="nav-item">
-                                            <span className="badge rounded-pill bg-danger">
-                                                10
-                                            </span>
-                                            Contributeurs
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="card-body">
-                                    <ul className="list-group">
-                                        <li className="list-group-item d-flex justify-content-between">
-                                            <h5>Name</h5>
-                                            <div className="d-flex justify-content-end">
-                                                <span className="badge rounded-pill bg-secondary m-auto">
-                                                    10
-                                                </span>
-                                                <ul className="list-unstyled team-info ps-2">
-                                                    <li>
-                                                        <img
-                                                            src="/images/avatar1.jpg"
-                                                            alt="Avatar"
-                                                        />
-                                                    </li>
-                                                    <li>
-                                                        <img
-                                                            src="/images/avatar2.jpg"
-                                                            alt="Avatar"
-                                                        />
-                                                    </li>
-                                                    <li>
-                                                        <img
-                                                            src="/images/avatar3.jpg"
-                                                            alt="Avatar"
-                                                        />
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -543,6 +536,17 @@ export default function Backlog(props) {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        {flash.message ? (
+                            <Alert
+                                variant="success"
+                                show={alert}
+                                onClose={() => setAlert(false)}
+                                dismissible
+                            >
+                                {flash.message}
+                            </Alert>
+                        ) : null}
+
                         <dl className="row">
                             <dt className="col-sm-3">Nom</dt>
                             <dd className="col-sm-9">
@@ -593,16 +597,6 @@ export default function Backlog(props) {
                                         Attributions
                                     </div>
                                     <div className="card-body">
-                                        {current.attributions.length
-                                            ? current.attributions.map((a) => (
-                                                  <span
-                                                      key={a.id}
-                                                      className="badge bg-secondary m-2"
-                                                  >
-                                                      {a.firstname}
-                                                  </span>
-                                              ))
-                                            : "AUCUN"}
                                         <div
                                             className="alert alert-secondary"
                                             role="alert"
@@ -625,13 +619,16 @@ export default function Backlog(props) {
                                                     );
                                                 }}
                                             />
-                                            <Button
-                                                onClick={affectTask}
-                                                variant="primary"
-                                                className="mt-1"
-                                            >
-                                                Affecter
-                                            </Button>
+                                            {auth.user.roles !==
+                                            "ROLE_EXECUTOR" ? (
+                                                <Button
+                                                    onClick={affectTask}
+                                                    variant="primary"
+                                                    className="mt-1"
+                                                >
+                                                    Affecter
+                                                </Button>
+                                            ) : null}
                                         </div>
                                     </div>
                                 </div>

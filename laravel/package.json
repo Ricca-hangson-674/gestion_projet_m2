@@ -25,6 +25,7 @@
         "@fullcalendar/daygrid": "^5.11.3",
         "@fullcalendar/react": "^5.11.2",
         "bootstrap": "^5.2.2",
+        "faker": "^6.6.6",
         "moment": "^2.29.4",
         "react-beautiful-dnd": "^13.1.1",
         "react-bootstrap": "^2.6.0",
@@ -32,6 +33,7 @@
         "react-datepicker": "^4.8.0",
         "react-datetime-picker": "^4.1.1",
         "react-select": "^5.6.0",
-        "smooth-dnd": "^0.12.1"
+        "smooth-dnd": "^0.12.1",
+        "uuid": "^9.0.0"
     }
 }

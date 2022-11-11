@@ -96,4 +96,19 @@ class SprintController extends Controller
     {
         //
     }
+
+    /**
+     * Start sprint
+     *
+     * @param Type|null $var
+     * @return void
+     */
+    public function start(Request $request)
+    {
+        $sprint = Sprint::find($request->sprint);
+        $sprint->status = 'PRET';
+        $sprint->save();
+
+        return Redirect::back()->with('message', 'Sprint start.');
+    }
 }

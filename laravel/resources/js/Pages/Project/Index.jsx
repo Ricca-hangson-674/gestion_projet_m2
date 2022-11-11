@@ -10,7 +10,7 @@ import { format, formatMoment } from "@/Utils/date.js";
 
 export default function Project(props) {
     /** Props */
-    const { projects, users, flash } = props;
+    const { auth, projects, users, flash } = props;
 
     /** State */
     const [show, setShow] = useState(false);
@@ -109,7 +109,6 @@ export default function Project(props) {
 
     const handleCloseForm = () => setForm(false);
     const handleShowForm = async (project = null) => {
-
         if (project) {
             const response = await getProject(project);
 
@@ -123,14 +122,13 @@ export default function Project(props) {
 
     const handleClose = () => setShow(false);
     const handleShow = async (project) => {
-
         const response = await getProject(project);
         setCurrent(response);
 
         setShow(true);
     };
 
-    // console.log(auth, projects, users);
+    console.log(auth);
 
     return (
         <>
@@ -147,9 +145,11 @@ export default function Project(props) {
                         <p className="mb-0">
                             Veuillez selectionner un projet ou creer un projet
                         </p>
-                        <Button variant="primary" onClick={handleShowForm}>
-                            Creer
-                        </Button>
+                        {auth.user.roles !== "ROLE_EXECUTOR" ? (
+                            <Button variant="primary" onClick={handleShowForm}>
+                                Creer
+                            </Button>
+                        ) : null}
                     </div>
                 </div>
 
@@ -198,7 +198,9 @@ export default function Project(props) {
                                     Modifier
                                 </Button>
                                 <a
-                                    href={route('selectProjet', {project: project.id})}
+                                    href={route("selectProjet", {
+                                        project: project.id,
+                                    })}
                                     className="card-link text-decoration-none"
                                 >
                                     Selectionner
