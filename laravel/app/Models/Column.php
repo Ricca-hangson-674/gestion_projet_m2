@@ -31,6 +31,6 @@ class Column extends Model
     public function tasks()
     {
         # related, foreignKey, ownerKey
-        return $this->hasMany(Task::class, 'column_id', 'id');
+        return $this->hasMany(Task::class, 'column_id', 'id')->where('nrh_tasks.project_id', session()->get('projectSelected')->id);;
     }
 }

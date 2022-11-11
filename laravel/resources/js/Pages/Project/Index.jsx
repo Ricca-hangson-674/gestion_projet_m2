@@ -109,6 +109,8 @@ export default function Project(props) {
 
     const handleCloseForm = () => setForm(false);
     const handleShowForm = async (project = null) => {
+        console.log('handleShowForm', project)
+
         if (project) {
             const response = await getProject(project);
 
@@ -146,7 +148,7 @@ export default function Project(props) {
                             Veuillez selectionner un projet ou creer un projet
                         </p>
                         {auth.user.roles !== "ROLE_EXECUTOR" ? (
-                            <Button variant="primary" onClick={handleShowForm}>
+                            <Button variant="primary" onClick={() => handleShowForm()}>
                                 Creer
                             </Button>
                         ) : null}

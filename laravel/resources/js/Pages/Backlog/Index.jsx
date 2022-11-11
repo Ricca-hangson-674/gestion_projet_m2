@@ -262,7 +262,7 @@ export default function Backlog(props) {
                                     </div>
                                     <div className="card-body sprint-list">
                                         <ul className="list-group">
-                                            <li className="list-group-item d-flex justify-content-between">
+                                            {/*<li className="list-group-item d-flex justify-content-between">
                                                 <h5>Name</h5>
                                                 <ul className="list-unstyled team-info">
                                                     <li>
@@ -272,7 +272,7 @@ export default function Backlog(props) {
                                                         />
                                                     </li>
                                                 </ul>
-                                            </li>
+                                                    </li>*/}
                                         </ul>
                                     </div>
                                 </div>

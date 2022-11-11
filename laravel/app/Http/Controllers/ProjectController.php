@@ -65,7 +65,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->except(['estimationBeginAt', 'estimationEndAt', 'beginAt', 'endAt']);
+        
+        /** DateTime */
+        $data['estimationBeginAt'] = nrh_dateTimeSQL($request->estimationBeginAt);
+        $data['estimationEndAt'] = nrh_dateTimeSQL($request->estimationEndAt);
+        $data['beginAt'] = nrh_dateTimeSQL($request->beginAt);
+        $data['endAt'] = nrh_dateTimeSQL($request->estimationBeginAt);
+
         $data['createdBy'] = Auth::id();
         Project::create($data);
 

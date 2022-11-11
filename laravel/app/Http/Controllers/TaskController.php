@@ -38,17 +38,24 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->except(['estimationBeginAt', 'estimationEndAt', 'beginAt', 'endAt']);
+
         $data['createdBy'] = Auth::id();
         $data['project_id'] = $request->session()->get('projectSelected')->id;
         $data['backlog_id'] = $request->session()->get('backlogSelected')->id;
         $data['column_id'] = $request->session()->get('columnSelected')->id;
 
+        /** DateTime */
+        $data['estimationBeginAt'] = nrh_dateTimeSQL($request->estimationBeginAt);
+        $data['estimationEndAt'] = nrh_dateTimeSQL($request->estimationEndAt);
+        $data['beginAt'] = nrh_dateTimeSQL($request->beginAt);
+        $data['endAt'] = nrh_dateTimeSQL($request->estimationBeginAt);
+
         # 2022-11-03 15:58:36
 
+        /** Duration */
         $dateDebut = new \DateTime(date('Y-m-d', strtotime($request->beginAt)));
         $dateFin = new \DateTime(date('Y-m-d', strtotime($request->endAt)));
-
         $data['duration'] = $dateFin->diff($dateDebut)->days;
         
         Task::create($data);

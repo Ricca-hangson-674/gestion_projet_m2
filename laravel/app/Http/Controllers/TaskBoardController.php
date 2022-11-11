@@ -16,6 +16,7 @@ class TaskBoardController extends Controller
     public function index()
     {
         $columns = Column::all()->transform(function ($column) {
+
             return [
                 'id' => $column->id,
                 'name' => $column->name,

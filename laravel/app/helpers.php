@@ -10,6 +10,13 @@ if (!function_exists('nrh_dateTime')) {
     }
 }
 
+if (!function_exists('nrh_dateTimeSQL')) {
+    function nrh_dateTimeSQL($date)
+    {
+        return Carbon::parse($date)->format('Y-m-d H:i:s');
+    }
+}
+
 if (!function_exists('nrh_chart')) {
     function nrh_chart($date)
     {
